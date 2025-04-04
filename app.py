@@ -14,7 +14,8 @@ import pickle
 # Load the dataset
 @st.cache_data
 def load_data():
-    data = pd.read_csv('ecommerce_sales.csv', encoding='ISO-8859-1')
+    url = "https://drive.google.com/file/d/1t0AQbrHvizP19RVaA6Zb7NX7TpFA-tdy/view?usp=drive_link"
+    data = pd.read_csv(url, encoding='ISO-8859-1')
     data['InvoiceDate'] = pd.to_datetime(data['InvoiceDate'])
     return data
 
