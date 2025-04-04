@@ -9,13 +9,22 @@ from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.losses import MeanSquaredError
 from tensorflow.keras.losses import MeanSquaredError
 import pickle
+import gdown
 
 
 # Load the dataset
 @st.cache_data
 def load_data():
-    url = "https://drive.google.com/file/d/1t0AQbrHvizP19RVaA6Zb7NX7TpFA-tdy/view?usp=drive_link"
-    data = pd.read_csv(url, encoding='ISO-8859-1')
+    # Define the Google Drive file URL
+    file_id = '1t0AQbrHvizP19RVaA6Zb7NX7TpFA-tdy'  # Replace with your file ID
+    file_url = f'https://drive.google.com/uc?export=download&id={file_id}'
+
+  # Download the file
+    gdown.download(file_url, 'downloaded_file.csv', quiet=False)
+
+  # Read the file into pandas dataframe (assuming CSV file)
+    data = pd.read_csv('downloaded_file.csv', encoding='ISO-8859-1')
+    # data = pd.read_csv(url, encoding='ISO-8859-1')
     data['InvoiceDate'] = pd.to_datetime(data['InvoiceDate'])
     return data
 
